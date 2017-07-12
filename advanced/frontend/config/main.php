@@ -10,7 +10,12 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language' => 'ru',
+    'sourceLanguage' => 'en',
     'controllerNamespace' => 'frontend\controllers',
+//     'defaultRoute' => 'site/about',
+//     'catchAll' => ['site/offline'],
+
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
@@ -36,14 +41,32 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            // List all supported languages here
+            // Make sure, you include your app's default language.
+            'languages' => ['en', 'uk', 'ru'],
             'rules' => [
             ],
         ],
-        */
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages',
+                    'sourceLanguage' => 'en',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        //'app/error' => 'error.php',
+                    ],
+                ],
+            ],
+        ],
+        'cache' => [
+            'class' => 'yii\caching\FileCache',
+        ],
     ],
     'params' => $params,
 ];
